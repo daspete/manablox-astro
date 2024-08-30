@@ -1,0 +1,21 @@
+{
+  "name": "manablox-astro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "start": "astro start",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "^8.3.3",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.15.1",
+    "tailwindcss": "^3.4.10"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

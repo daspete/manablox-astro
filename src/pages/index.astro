@@ -1,0 +1,42 @@
+---
+import { API_URL } from "astro:env/server";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const getPosts = async () => {
+  const postsResponse = await fetch(`${API_URL}/posts`);
+  return await postsResponse.json();
+};
+
+const getAlbums = async () => {
+  const albumsResponse = await fetch(`${API_URL}/albums`);
+  return await albumsResponse.json();
+};
+
+const [posts, albums] = await Promise.all([getPosts(), getAlbums()]);
+---
+
+<BaseLayout>
+  <div class="flex">
+    <div class="w-1/2">
+      <div class="font-bold">Posts</div>
+      {
+        posts.map((post: { title: string; id: number }) => (
+          <div>
+            <a href={`/posts/${post.id}`}>{post.title}</a>
+          </div>
+        ))
+      }
+    </div>
+    <div class="w-1/2">
+      <div class="font-bold">Albums</div>
+      {
+        albums.map((album: { title: string; id: number }) => (
+          <div>
+            <a href={`/albums/${album.id}`}>{album.title}</a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
