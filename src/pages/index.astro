@@ -1,7 +1,6 @@
 ---
 import { API_URL } from "astro:env/server";
-
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const getPosts = async () => {
   const postsResponse = await fetch(`${API_URL}/posts`);
