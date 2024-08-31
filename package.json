@@ -8,7 +8,7 @@
     "build": "astro build",
     "start": "astro start",
     "preview": "astro preview",
-    "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
+    "lint": "prettier --write  \"**/*.{mjs,cjs,js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{mjs,cjs,js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
     "@astrojs/node": "^8.3.3",
