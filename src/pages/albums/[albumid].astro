@@ -1,36 +1,34 @@
 ---
-import { API_URL } from "astro:env/server";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import { API_URL } from 'astro:env/server'
+import BaseLayout from '@layouts/BaseLayout.astro'
 
-const { albumid } = Astro.params;
+const { albumid } = Astro.params
 
 const getAlbum = async () => {
-  const albumResponse = await fetch(`${API_URL}/albums/${albumid}`);
-  return await albumResponse.json();
-};
+  const albumResponse = await fetch(`${API_URL}/albums/${albumid}`)
+  return await albumResponse.json()
+}
 
 const getAlbumPhotos = async () => {
-  const albumPhotosResponse = await fetch(
-    `${API_URL}/albums/${albumid}/photos`
-  );
-  return await albumPhotosResponse.json();
-};
+  const albumPhotosResponse = await fetch(`${API_URL}/albums/${albumid}/photos`)
+  return await albumPhotosResponse.json()
+}
 
-const [album, albumPhotos] = await Promise.all([getAlbum(), getAlbumPhotos()]);
+const [album, albumPhotos] = await Promise.all([getAlbum(), getAlbumPhotos()])
 ---
 
 <BaseLayout>
-  <a href="/">back</a>
+  <a href='/'>back</a>
   <div>{album.title}</div>
-  <div class="flex flex-wrap">
+  <div class='flex flex-wrap'>
     {
       albumPhotos.map(
         (photo: { title: string; id: number; thumbnailUrl: string }) => (
-          <div class="w-[150px]">
+          <div class='w-[150px]'>
             <div>{photo.title}</div>
             <img
-              class="w-[150px] h-[150px]"
-              loading="lazy"
+              class='w-[150px] h-[150px]'
+              loading='lazy'
               src={photo.thumbnailUrl}
               alt={photo.title}
             />

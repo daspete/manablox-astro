@@ -1,0 +1,16 @@
+---
+import { API_URL } from 'astro:env/server'
+
+const albumsResponse = await fetch(`${API_URL}/albums`)
+const albums = await albumsResponse.json()
+---
+
+<ul>
+  {
+    albums.map((album: { title: string; id: number }) => (
+      <li>
+        <a href={`/albums/${album.id}`}>{album.title}</a>
+      </li>
+    ))
+  }
+</ul>

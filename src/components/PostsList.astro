@@ -1,0 +1,16 @@
+---
+import { API_URL } from 'astro:env/server'
+
+const postsResponse = await fetch(`${API_URL}/posts`)
+const posts = await postsResponse.json()
+---
+
+<ul>
+  {
+    posts.map((post: { title: string; id: number }) => (
+      <li>
+        <a href={`/posts/${post.id}`}>{post.title}</a>
+      </li>
+    ))
+  }
+</ul>
