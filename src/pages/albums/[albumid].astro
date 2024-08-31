@@ -22,19 +22,12 @@ const [album, albumPhotos] = await Promise.all([getAlbum(), getAlbumPhotos()])
   <div>{album.title}</div>
   <div class='flex flex-wrap'>
     {
-      albumPhotos.map(
-        (photo: { title: string; id: number; thumbnailUrl: string }) => (
-          <div class='w-[150px]'>
-            <div>{photo.title}</div>
-            <img
-              class='w-[150px] h-[150px]'
-              loading='lazy'
-              src={photo.thumbnailUrl}
-              alt={photo.title}
-            />
-          </div>
-        )
-      )
+      albumPhotos.map((photo: { title: string; id: number; thumbnailUrl: string }) => (
+        <div class='w-[150px]'>
+          <div>{photo.title}</div>
+          <img class='h-[150px] w-[150px]' loading='lazy' src={photo.thumbnailUrl} alt={photo.title} />
+        </div>
+      ))
     }
   </div>
 </BaseLayout>
