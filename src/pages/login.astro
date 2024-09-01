@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+
+if (Astro.locals.user) {
+  return Astro.redirect('/')
+}
+---
+
+<BaseLayout>
+  <form method='post' action='/api/login'>
+    <label for='email'>email</label>
+    <input name='email' id='email' /><br />
+    <label for='password'>Password</label>
+    <input type='password' name='password' id='password' /><br />
+    <button>Continue</button>
+    <p id='form-error'></p>
+  </form>
+</BaseLayout>
+
+<script>
+  const errorMessageElement = document.getElementById('form-error')
+
+  document.forms[0].addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    if (errorMessageElement) {
+      errorMessageElement.innerText = ''
+    }
+
+    const formElement = event.target as HTMLFormElement
+    const response = await fetch(formElement.action, {
+      method: formElement.method,
+      body: new FormData(formElement)
+    })
+    if (response.ok) {
+      window.location.href = '/'
+    } else {
+      const data = await response.json()
+
+      if (errorMessageElement) {
+        errorMessageElement.innerText = data.error
+      }
+    }
+  })
+</script>

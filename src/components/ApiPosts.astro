@@ -1,6 +1,5 @@
 ---
-import RedberryClient from '@graphql/clients/RedberryClient'
-import { Debug } from 'astro:components'
+import RedberryClient from '@lib/redberry-graphql'
 import gql from 'graphql-tag'
 
 const { data, loading } = await RedberryClient.query({
