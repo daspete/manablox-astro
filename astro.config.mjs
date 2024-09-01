@@ -1,6 +1,7 @@
 import { defineConfig, envField } from 'astro/config'
 import node from '@astrojs/node'
 import tailwind from '@astrojs/tailwind'
+import vue from '@astrojs/vue'
 
 export default defineConfig({
   devToolbar: {
@@ -14,6 +15,7 @@ export default defineConfig({
   }),
 
   integrations: [
+    vue({}),
     tailwind({
       nesting: true
     })
@@ -22,7 +24,8 @@ export default defineConfig({
   experimental: {
     env: {
       schema: {
-        API_URL: envField.string({ context: 'server', access: 'public' })
+        API_URL: envField.string({ context: 'server', access: 'public' }),
+        GRAPHQL_URL: envField.string({ context: 'server', access: 'public' })
       }
     }
   }

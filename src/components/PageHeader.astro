@@ -1,7 +1,12 @@
 ---
-
+import UserMenu from './UserMenu.vue'
 ---
 
 <header>
-  <div>Header</div>
+  <div class='flex items-center justify-between bg-gray-300'>
+    <div><a href='/'>Manablox</a></div>
+    <div>
+      <UserMenu client:load />
+    </div>
+  </div>
 </header>

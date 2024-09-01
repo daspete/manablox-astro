@@ -1,0 +1,35 @@
+---
+import RedberryClient from '@graphql/clients/RedberryClient'
+import { Debug } from 'astro:components'
+import gql from 'graphql-tag'
+
+const { data, loading } = await RedberryClient.query({
+  query: gql`
+    query {
+      posts {
+        data {
+          id
+          title
+        }
+      }
+    }
+  `
+})
+
+const posts = data.posts.data
+---
+
+<div>
+  {loading && <div>Loading...</div>}
+  {
+    !loading && (
+      <ul>
+        {posts.map((post: { title: string; id: number }) => (
+          <li>
+            <a href={`/posts/${post.id}`}>{post.title}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>
