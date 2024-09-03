@@ -1,12 +1,15 @@
 ---
 import UserMenu from './UserMenu.vue'
+
+const currentUser = Astro.locals.user
 ---
 
 <header>
   <div class='flex items-center justify-between bg-gray-300'>
     <div><a href='/'>Manablox</a></div>
+    <div><a href='/test'>GraphQL Test</a></div>
     <div>
-      <UserMenu client:load />
+      <UserMenu currentUser={currentUser} client:load />
     </div>
   </div>
 </header>

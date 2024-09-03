@@ -1,5 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { User } from 'lucia';
+
+defineProps<{
+  currentUser: User | null;
+}>();
+
+const logout = () => {
+  
+};
+</script>
 
 <template>
-  <a href="/test">Test</a>
+  <div class="flex">
+    <div v-if="currentUser">
+      {{ currentUser && currentUser.email }}
+
+      <button @click="logout">Logout</button>
+    </div>
+    <div v-else>
+      <a href="/login">Login</a>
+    </div>
+  </div>
 </template>
