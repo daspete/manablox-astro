@@ -24,7 +24,6 @@ export default defineConfig({
   experimental: {
     env: {
       schema: {
-        API_URL: envField.string({ context: 'server', access: 'public' }),
         GRAPHQL_URL: envField.string({ context: 'server', access: 'public' })
       }
     }

@@ -1,5 +1,4 @@
 import { lucia } from '@lib/auth'
-import { $currentUser } from '@stores/current-user'
 import { defineMiddleware } from 'astro:middleware'
 import { verifyRequestOrigin } from 'lucia'
 
@@ -16,7 +15,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (!sessionId) {
     context.locals.user = null
     context.locals.session = null
-    $currentUser.set(null)
 
     return next()
   }
@@ -33,7 +31,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   context.locals.session = session
   context.locals.user = user
-  $currentUser.set(user)
 
   return next()
 })

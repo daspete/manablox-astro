@@ -1,6 +1,4 @@
 ---
-import UserMenu from './UserMenu.vue'
-
 const currentUser = Astro.locals.user
 ---
 
@@ -9,7 +7,11 @@ const currentUser = Astro.locals.user
     <div><a href='/'>Manablox</a></div>
     <div><a href='/test'>GraphQL Test</a></div>
     <div>
-      <UserMenu currentUser={currentUser} client:load />
+      {currentUser ? (
+        <a href='/logout'>Logout</a>
+      ) : (
+        <a href='/login'>Login</a>
+      )}
     </div>
   </div>
 </header>

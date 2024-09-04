@@ -1,5 +1,4 @@
 ---
-import ApiPosts from '@components/ApiPosts.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 
 const user = Astro.locals.user
@@ -11,7 +10,10 @@ if (!user) {
 
 <BaseLayout>
   <div>
-    <div>Hello {user.email}</div>
-    <ApiPosts />
+    {user ? (
+      <div>Hello {user.email}</div>
+    ) : (
+      <div>Anonym</div>
+    )}
   </div>
 </BaseLayout>
