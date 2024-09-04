@@ -15,7 +15,9 @@ export default defineConfig({
   }),
 
   integrations: [
-    vue({}),
+    vue({
+      appEntrypoint: '/src/vue-app.ts'
+    }),
     tailwind({
       nesting: true
     })
