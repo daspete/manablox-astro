@@ -1,0 +1,114 @@
+fragment PageMenuContentFragment on PageContent {
+    icon
+    title(locales: $locales) {
+        locale
+        content
+    }
+
+    slug(locales: $locales) {
+        locale
+        content
+    }
+}
+fragment FolderMenuContentFragment on FolderContent {
+    title(locales: $locales) {
+        locale
+        content
+    }
+}
+fragment ArticleMenuContentFragment on ArticleContent {
+    title(locales: $locales) {
+        locale
+        content
+    }
+
+    slug(locales: $locales) {
+        locale
+        content
+    }
+}
+
+query menus($query: QueryDto!, $locales: [String!]!) {
+    findContents(query: $query) {
+        id
+        type
+        content {
+            ... on MenuContent {
+                title(locales: $locales) {
+                    locale
+                    content
+                }
+                technicalName
+            }
+        }
+        children {
+            id
+            type
+            showInMenu(locales: $locales) {
+                locale
+                content
+            }
+            permalinks {
+                locale
+                content
+            }
+            content {
+                ...PageMenuContentFragment
+                ...FolderMenuContentFragment
+                ...ArticleMenuContentFragment
+            }
+
+            children {
+                id
+                type
+                showInMenu(locales: $locales) {
+                    locale
+                    content
+                }
+                permalinks {
+                    locale
+                    content
+                }
+                content {
+                    ...PageMenuContentFragment
+                    ...FolderMenuContentFragment
+                    ...ArticleMenuContentFragment
+                }
+                children {
+                    id
+                    type
+                    showInMenu(locales: $locales) {
+                        locale
+                        content
+                    }
+                    permalinks {
+                        locale
+                        content
+                    }
+                    content {
+                        ...PageMenuContentFragment
+                        ...FolderMenuContentFragment
+                        ...ArticleMenuContentFragment
+                    }
+                    children {
+                        id
+                        type
+                        showInMenu(locales: $locales) {
+                            locale
+                            content
+                        }
+                        permalinks {
+                            locale
+                            content
+                        }
+                        content {
+                            ...PageMenuContentFragment
+                            ...FolderMenuContentFragment
+                            ...ArticleMenuContentFragment
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

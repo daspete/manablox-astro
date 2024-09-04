@@ -21,6 +21,9 @@
             "@stores/*": [
                 "src/stores/*"
             ],
+            "@assets/*": [
+                "src/assets/*"
+            ],
         }
     }
 }

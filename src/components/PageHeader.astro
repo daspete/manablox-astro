@@ -1,22 +1,15 @@
 ---
 const currentUser = Astro.locals.user
+import redberryApi from '@lib/redberry-graphql'
+import menusQuery from '@graphql/queries/menus.graphql'
+
+const { data: user } = await redberryApi.query({
+  query: menusQuery
+})
+
+
 ---
 
 <header>
-  <div class='flex items-center justify-between bg-gray-300'>
-    <div><a href='/'>Manablox</a></div>
-    <div>
-      <a href='/test'>
-        <button
-          class='ml-2 rounded-md border border-transparent bg-slate-800 px-4 py-2 text-center text-sm text-white shadow-md transition-all hover:bg-slate-700 hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
-          type='button'
-        >
-          Button
-        </button>
-      </a>
-    </div>
-    <div>
-      {currentUser ? <a href='/logout'>Logout</a> : <a href='/login'>Login</a>}
-    </div>
-  </div>
+  
 </header>
