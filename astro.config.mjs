@@ -2,6 +2,7 @@ import { defineConfig, envField } from 'astro/config'
 import node from '@astrojs/node'
 import tailwind from '@astrojs/tailwind'
 import vue from '@astrojs/vue'
+import graphqlLoader from 'vite-plugin-graphql-loader'
 
 export default defineConfig({
   devToolbar: {
@@ -22,6 +23,9 @@ export default defineConfig({
       nesting: true
     })
   ],
+  vite: {
+    plugins: [graphqlLoader()]
+  },
 
   experimental: {
     env: {
