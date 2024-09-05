@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, type DocumentNode, type NormalizedCacheObject } from '@apollo/client/core'
 import { GRAPHQL_URL } from 'astro:env/server'
 
-console.log('GRAPHQL_URL:', GRAPHQL_URL)
+import menusQuery from '@graphql/queries/menus.graphql'
 
 const client = new ApolloClient({
   uri: GRAPHQL_URL,
@@ -15,7 +15,20 @@ class Redberry {
     this.client = client
   }
 
-  async query(query: DocumentNode, variables = {}) {
+  async getMenus(menuNames: Array<string>) {
+    const menus = await this.singleQuery(menusQuery, {
+      query: {
+        filters: [
+          { fieldName: 'content.technicalName', value: menuNames.join(','), option: 'In' }
+        ]
+      },
+      locales: ['de']
+    })
+
+    return menus;
+  }
+
+  async singleQuery(query: DocumentNode, variables = {}) {
     const { data } = await this.client.query({
       query,
       variables

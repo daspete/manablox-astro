@@ -1,21 +1,23 @@
 ---
 import redberryApi from '@lib/redberry-graphql'
-import menusQuery from '@graphql/queries/menus.graphql'
 
 const currentUser = Astro.locals.user
 
-const menu: Array<{ children: Array<{ id: string }> }> = await redberryApi.query(menusQuery, {
-  query: {
-    filters: [
-      { fieldName: 'content.technicalName', value: 'header-menu', option: 'In' }
-    ]
-  },
-  locales: ['de']
-})
+const menus = await redberryApi.getMenus(['header-menu'])
 
+console.log(menus)
+// console.log(menu[0].children[0])
 
 ---
 
 <header>
-  {menu[0].children.map((item) => (<div>{item.id}</div>))}
+  <nav>
+    <ul>
+      {menus[0].children.map((item) => (
+        <li>
+          <a href={item.permalinks && item.permalinks[0] ? item.permalinks[0].content : ''}>{item.content.title[0].content}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </header>
