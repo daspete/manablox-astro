@@ -1,0 +1,15 @@
+---
+import ContentCardsInteractive from './ContentCardsInteractive.vue'
+import redberry from '@lib/redberry'
+
+const contentlist = await redberry.fetchContentlist([
+  {
+    fieldName: 'type',
+    value: 'Article'
+  }
+])
+---
+
+<div>
+  <ContentCardsInteractive client:idle contentlist={contentlist} />
+</div>

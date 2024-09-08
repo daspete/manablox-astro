@@ -1,0 +1,29 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/templates
+    depends_on:
+      - app
+    networks:
+      manabloxnet:
+        aliases:
+          - immomedien.redberry.test
+
+  app:
+    image: node:20
+    hostname: app
+    working_dir: /app
+    volumes:
+      - .:/app
+    networks:
+      - manabloxnet
+    command: sh -c "yarn && exec yarn dev --host=0.0.0.0"
+    # command: sh -c "yarn && yarn build && exec yarn preview --host=0.0.0.0"
+
+networks:
+  manabloxnet:
+    driver: bridge
+    

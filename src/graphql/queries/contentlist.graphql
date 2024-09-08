@@ -1,0 +1,319 @@
+fragment DynamicAssetFields on Asset {
+    id
+    url
+    title
+    focusPointX
+    focusPointY
+    width
+    height
+}
+
+fragment DynamicCategoryFields on Category {
+    id
+    title(locales: $locales) {
+        locale
+        content
+    }
+    type
+}
+
+fragment DynamicTagFields on Tag {
+    id
+    title(locales: $locales) {
+        locale
+        content
+    }
+}
+
+fragment DynamicUserFields on User {
+    id
+    gender
+    firstname
+    lastname
+    email
+    isActive
+    avatar {
+        id
+        url
+    }
+}
+
+fragment DynamicCompanyContentFieldsShort on CompanyContent {
+    type
+    CompanyFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliasslug: slug(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliascompanyDescription: companyDescription(locales: $locales) {
+        locale
+        content
+    }
+
+    CompanyFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+}
+
+fragment DynamicPressreleaseContentFields on PressreleaseContent {
+    type
+    PressreleaseFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    PressreleaseFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    PressreleaseFieldAliastimeToRead: timeToRead(locales: $locales) {
+        locale
+        content
+    }
+    PressreleaseFieldAliaspaidContent: paidContent
+    PressreleaseFieldAliasnotFreelyAccessible: notFreelyAccessible
+    PressreleaseFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+    PressreleaseFieldAliaspressType: pressType {
+        ...DynamicCategoryFields
+    }
+    PressreleaseFieldAliasteaser: teaser(locales: $locales) {
+        locale
+        content
+    }
+
+    PressreleaseFieldAliascompany: company {
+        id
+        type
+        content {
+            ...DynamicCompanyContentFieldsShort
+        }
+    }
+}
+
+fragment DynamicPageContentFields on PageContent {
+    type
+    PageFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    PageFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    PageFieldAliasonlyLoggedIn: onlyLoggedIn
+    PageFieldAliasauthor: author {
+        ...DynamicUserFields
+    }
+    PageFieldAliasauthorAlias: authorAlias(locales: $locales) {
+        locale
+        content
+    }
+    PageFieldAliascategories: categories {
+        ...DynamicCategoryFields
+    }
+    PageFieldAliastags: tags {
+        ...DynamicTagFields
+    }
+    PageFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+}
+
+fragment DynamicJobContentFields on JobContent {
+    type
+    JobFieldAliascompany: company {
+        id
+        type
+        permalinks {
+            content
+            locale
+        }
+        content {
+            ...DynamicCompanyContentFieldsShort
+        }
+    }
+    JobFieldAliaslogo: logo {
+        ...DynamicAssetFields
+    }
+    JobFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    JobFieldAliasjobfield: jobfield {
+        ...DynamicCategoryFields
+    }
+    JobFieldAliassalary: salary
+    JobFieldAliasemployment: employment {
+        ...DynamicCategoryFields
+    }
+    JobFieldAliasjobLocation: jobLocation(locales: $locales) {
+        locale
+        content
+    }
+    JobFieldAliasaddress: address
+    JobFieldAliaszipcode: zipcode
+    JobFieldAliascity: city
+    JobFieldAliascountry: country
+    JobFieldAliaswebsite: website
+    JobFieldAliasentrydate: entrydate
+    JobFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+
+    JobFieldAliascontactname: contactname
+    JobFieldAliascontactemail: contactemail
+    JobFieldAliascontactnumber: contactnumber
+    JobFieldAliascontactavatar: contactavatar {
+        ...DynamicAssetFields
+    }
+    JobFieldAliasresortDate: resortDate
+}
+
+fragment DynamicEventContentFields on EventContent {
+    type
+    EventFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    EventFieldAliascompany: company {
+        id
+        type
+        permalinks {
+            content
+            locale
+        }
+        content {
+            ...DynamicCompanyContentFieldsShort
+        }
+    }
+    EventFieldAliascategories: categories {
+        ...DynamicCategoryFields
+    }
+    EventFieldAliaslogo: logo {
+        ...DynamicAssetFields
+    }
+    EventFieldAliaswebsite: website
+    EventFieldAliaseventLocation: eventLocation
+    EventFieldAliasaddress: address
+    EventFieldAliasstartDate: startDate
+    EventFieldAliasendDate: endDate
+    EventFieldAliashost: host
+    EventFieldAliashostmail: hostmail
+    EventFieldAliasonlyWithInvite: onlyWithInvite
+    EventFieldAliasprice: price
+    EventFieldAliasadditionalPriceInfo: additionalPriceInfo
+    EventFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    EventFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+    EventFieldAliasresortDate: resortDate
+}
+
+fragment DynamicCompanyContentFields on CompanyContent {
+    type
+    CompanyFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliascompanyDescription: companyDescription(locales: $locales) {
+        locale
+        content
+    }
+    CompanyFieldAliascompanyEmail: companyEmail
+    CompanyFieldAliascompanyPhoneMobile: companyPhoneMobile
+    CompanyFieldAliascompanyPhone: companyPhone
+    CompanyFieldAliascompanyWebsite: companyWebsite
+    CompanyFieldAliascompanyRegisterNumber: companyRegisterNumber
+    CompanyFieldAliascompanyTaxNumber: companyTaxNumber
+    CompanyFieldAliascompanyAddressStreet: companyAddressStreet
+    CompanyFieldAliascompanyAddressCity: companyAddressCity
+    CompanyFieldAliascompanyAddressState: companyAddressState
+    CompanyFieldAliascompanyAddressZip: companyAddressZip
+    CompanyFieldAliascompanyAddressCountry: companyAddressCountry
+    CompanyFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+    CompanyFieldAliascategories: categories {
+        ...DynamicCategoryFields
+    }
+}
+
+fragment DynamicArticleContentFields on ArticleContent {
+    type
+    ArticleFieldAliastitle: title(locales: $locales) {
+        locale
+        content
+    }
+    ArticleFieldAliasexcerpt: excerpt(locales: $locales) {
+        locale
+        content
+    }
+    ArticleFieldAliasfeaturedImage: featuredImage {
+        ...DynamicAssetFields
+    }
+    ArticleFieldAliasonlyLoggedIn: onlyLoggedIn
+    ArticleFieldAliasisOpener: isOpener
+    ArticleFieldAliastimeToRead: timeToRead(locales: $locales) {
+        locale
+        content
+    }
+    ArticleFieldAliaspaidContent: paidContent
+    ArticleFieldAliasnotFreelyAccessible: notFreelyAccessible
+    ArticleFieldAliasauthor: author {
+        ...DynamicUserFields
+    }
+    ArticleFieldAliasauthorAlias: authorAlias(locales: $locales) {
+        locale
+        content
+    }
+    ArticleFieldAliascategories: categories {
+        ...DynamicCategoryFields
+    }
+    ArticleFieldAliastags: tags {
+        ...DynamicTagFields
+    }
+    ArticleFieldAliaspriority: priority
+    ArticleFieldAliasmediaType: mediaType
+}
+
+query contentlist($query: QueryDto!, $locales: [String!]!) {
+    contents(query: $query) {
+        total
+        items {
+            id
+            type
+            permalinks {
+                locale
+                content
+            }
+            content {
+                ...DynamicPressreleaseContentFields
+                ...DynamicPageContentFields
+                ...DynamicJobContentFields
+                ...DynamicEventContentFields
+                ...DynamicCompanyContentFields
+                ...DynamicArticleContentFields
+            }
+            publicationTimestamps {
+                publishedOn
+            }
+            createdAt
+        }
+    }
+}

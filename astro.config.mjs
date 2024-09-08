@@ -30,7 +30,7 @@ export default defineConfig({
   experimental: {
     env: {
       schema: {
-        GRAPHQL_URL: envField.string({ context: 'server', access: 'public' })
+        GRAPHQL_URL: envField.string({ context: 'client', access: 'public' })
       }
     }
   }

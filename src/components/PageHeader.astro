@@ -1,19 +1,20 @@
 ---
-import redberryApi from '@lib/redberry-graphql'
+import redberry from '@lib/redberry'
 
 const currentUser = Astro.locals.user
 
-const menus = await redberryApi.getMenus(['header-menu'])
+await redberry.initialFetch()
 
-console.log(menus)
-// console.log(menu[0].children[0])
+const headerMenu = redberry.getMenu('header-menu')
+
+
 
 ---
 
 <header>
   <nav>
     <ul>
-      {menus[0].children.map((item) => (
+      {headerMenu && headerMenu.children.map((item) => (
         <li>
           <a href={item.permalinks && item.permalinks[0] ? item.permalinks[0].content : ''}>{item.content.title[0].content}</a>
         </li>
